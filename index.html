@@ -87,7 +87,7 @@
     function checkCertificate() {
       const no = document.getElementById('certNo').value.trim();
       if (!no) {
-        alert('দয়া করে C.No দিন!');
+        alert('error C.No!');
         return;
       }
       window.location.href = 'certificate.html?cno=' + no;
