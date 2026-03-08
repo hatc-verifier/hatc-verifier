@@ -1,90 +1,92 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #fff;
-  color: #000;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #000000;
 }
 
 .header {
   text-align: center;
-  background: #fff;
-  padding: 10px 0;
+  padding: 0;
+  margin: 0;
 }
 
 .header img {
   width: 100%;
-  max-width: 1000px;
   height: auto;
   display: block;
   margin: 0 auto;
+  max-width: 1000px;
 }
 
-.container {
+.main {
   max-width: 600px;
   margin: 40px auto;
-  padding: 0 20px;
   text-align: center;
+  padding: 0 20px;
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: bold;
-  color: #000;
   margin: 20px 0 10px;
+  color: #000;
 }
 
 p {
   font-size: 16px;
   line-height: 1.5;
   margin: 0 0 30px;
+  color: #000;
 }
 
-.search-box {
+.search-form {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 0;
-  flex-wrap: wrap;
+  align-items: stretch;
+  max-width: 450px;
+  margin: 0 auto;
 }
 
 input {
+  flex: 1;
   padding: 12px 15px;
   font-size: 18px;
-  width: 250px;
   border: 1px solid #000;
   border-right: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: 0;
   box-sizing: border-box;
+  min-width: 200px;
 }
 
 button {
-  padding: 12px 25px;
+  padding: 12px 30px;
   font-size: 18px;
   background: #006600;
   color: white;
   border: 1px solid #006600;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 button:hover {
   background: #004d00;
 }
 
-/* মোবাইলে ভালো ফিট করার জন্য */
+/* মোবাইলের জন্য */
 @media (max-width: 600px) {
-  .search-box {
+  .search-form {
     flex-direction: column;
   }
   input {
     width: 100%;
-    border-radius: 4px;
-    margin-bottom: 10px;
     border-right: 1px solid #000;
+    border-radius: 0;
+    margin-bottom: 10px;
   }
   button {
     width: 100%;
-    border-radius: 4px;
   }
 }
