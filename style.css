@@ -7,21 +7,30 @@ body {
 
 .header {
   text-align: center;
-  padding: 10px 0;
+  padding: 0;
+  margin: 0;
   background: white;
 }
 
 .header img {
-  width: 100%;
-  max-width: 1000px;   /* তোমার ছবির সাইজ অনুসারে চেঞ্জ করতে পারো */
-  height: auto;
+  width: 100%;               /* মোবাইলে পুরো স্ক্রিনে ফিট */
+  height: auto;              /* অনুপাত ঠিক রাখে */
   display: block;
   margin: 0 auto;
+  max-width: 1000px;         /* ডেস্কটপে খুব বড় না হয় */
+}
+
+/* মোবাইলের জন্য অতিরিক্ত অ্যাডজাস্ট */
+@media (max-width: 600px) {
+  .header img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .container {
   max-width: 700px;
-  margin: 30px auto;
+  margin: 20px auto;
   padding: 20px;
   text-align: center;
 }
@@ -46,13 +55,14 @@ p {
 input {
   padding: 12px;
   font-size: 18px;
-  width: 250px;
+  width: 70%;
+  max-width: 300px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 button {
-  padding: 12px 30px;
+  padding: 12px 25px;
   font-size: 18px;
   background: #006600;
   color: white;
