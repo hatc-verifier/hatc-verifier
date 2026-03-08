@@ -1,32 +1,66 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+}
+
 .header {
   text-align: center;
-  margin-bottom: 30px;
+  padding: 10px 0;
+  background: white;
 }
-.logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px; /* লোগোর মাঝে দূরত্ব */
+
+.header img {
+  width: 100%;
+  max-width: 1000px;   /* তোমার ছবির সাইজ অনুসারে চেঞ্জ করতে পারো */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #006600;
   margin-bottom: 10px;
 }
-.hat-logo, .cambridge-logo {
-  max-height: 80px; /* লোগোর উচ্চতা অ্যাডজাস্ট করো */
-  width: auto;
+
+p {
+  font-size: 18px;
+  margin-bottom: 30px;
 }
-.search-box {
-  text-align: center;
-  margin: 20px 0;
+
+.search {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
+
 input {
   padding: 12px;
-  width: 250px;
   font-size: 18px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
+
 button {
-  padding: 12px 25px;
+  padding: 12px 30px;
+  font-size: 18px;
   background: #006600;
   color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 18px;
+}
+
+button:hover {
+  background: #004d00;
 }
