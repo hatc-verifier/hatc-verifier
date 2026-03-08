@@ -5,76 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Certificate Details</title>
   <style>
-    body { 
-      margin: 0; 
-      padding: 0; 
-      font-family: Arial, sans-serif; 
-      background: #fff; 
-      color: #000; 
-    }
-    .header { 
-      text-align: center; 
-      padding: 15px 0 10px; 
-      background: #fff; 
-    }
-    .header img { 
-      width: 100%; 
-      max-width: 900px; 
-      height: auto; 
-      display: block; 
-      margin: 0 auto; 
-    }
-    .main { 
-      max-width: 700px; 
-      margin: 20px auto; 
-      padding: 0 15px; 
-    }
-    h2 { 
-      font-size: 20px; 
-      margin: 20px 0 10px; 
-      text-align: left; 
-    }
-    .back { 
-      float: right; 
-      color: blue; 
-      text-decoration: underline; 
-      font-size: 16px; 
-    }
-    .details-box { 
-      border: 2px solid #000; 
-      padding: 0; 
-      margin: 20px 0; 
-      background: #fff; 
-    }
-    table { 
-      width: 100%; 
-      border-collapse: collapse; 
-      border: none; 
-    }
-    th, td { 
-      border: 1px solid #000; 
-      padding: 6px 8px; 
-      text-align: left; 
-      font-size: 14px; 
-      vertical-align: top; 
-    }
-    th { 
-      background: #fff; 
-      font-weight: bold; 
-      width: 35%; 
-    }
-    .genuine { 
-      color: green; 
-      font-weight: bold; 
-      text-align: center; 
-      margin: 20px 0; 
-      font-size: 16px; 
-    }
-    .contact { 
-      margin-top: 40px; 
-      text-align: center; 
-      font-size: 14px; 
-    }
+    body { margin:0; padding:0; font-family:Arial,sans-serif; background:#fff; color:#000; }
+    .header { text-align:center; padding:15px 0 10px; background:#fff; }
+    .header img { width:100%; max-width:900px; height:auto; display:block; margin:0 auto; }
+    .main { max-width:700px; margin:20px auto; padding:0 15px; }
+    h2 { font-size:22px; margin:20px 0 10px; text-align:left; }
+    .back { float:right; color:blue; text-decoration:underline; font-size:16px; }
+    .details-box { border:2px solid #000; padding:15px; margin:20px 0; background:#fff; }
+    table { width:100%; border-collapse:collapse; }
+    th, td { border:1px solid #000; padding:8px 10px; text-align:left; font-size:14px; }
+    th { background:#fff; width:40%; font-weight:bold; }
+    .genuine { color:green; font-weight:bold; text-align:center; margin:20px 0; font-size:16px; }
+    .error-msg { color:red; font-weight:bold; text-align:center; font-size:18px; margin:20px 0; }
+    .contact { margin-top:40px; text-align:center; font-size:14px; }
   </style>
 </head>
 <body>
@@ -85,7 +28,7 @@
   <div class="main">
     <h2>Details Below: <a href="index.html" class="back">Back To Home Page</a></h2>
 
-    <div class="details-box">
+    <div class="details-box" id="details-box">
       <table>
         <tr><th>C. No</th><td id="c_no"></td></tr>
         <tr><th>Name</th><td id="name"></td></tr>
@@ -100,7 +43,8 @@
       </table>
     </div>
 
-    <p class="genuine">The above certificate is genuine, and issued by Human Assets Training Institute</p>
+    <p id="genuine-msg" class="genuine"></p>
+    <p id="error-msg" class="error-msg"></p>
 
     <div class="contact">
       <h3>Contact us:</h3>
@@ -113,19 +57,36 @@
     const params = new URLSearchParams(window.location.search);
     const cno = params.get('cno');
 
-    if (cno === '121086') {
-      document.getElementById('c_no').textContent = '121086';
-      document.getElementById('name').textContent = 'BAHADUR ALI AKBAR';
-      document.getElementById('id_pp').textContent = '2478695741';
-      document.getElementById('dob').textContent = '/';
-      document.getElementById('course').textContent = 'FIRE WATCH TRAINING(Hazard Recognition, Fire Safety, SCBA, Gas Testing)';
-      document.getElementById('type').textContent = 'Health & Safety';
-      document.getElementById('duration').textContent = '20-Jan-2026 To 19-Jan-2028';
-      document.getElementById('nationality').textContent = 'BANGLADESHI';
-      document.getElementById('company').textContent = 'INDIVIDUAL CASH';
-      document.getElementById('cert_type').textContent = 'HAT';
+    if (!cno) {
+      document.getElementById('error-msg').textContent = 'No Certificate Number Provided!';
     } else {
-      document.querySelector('.details-box').innerHTML = '<p style="color:red; text-align:center;">Certificate not found!</p>';
+      document.getElementById('c_no').textContent = cno;
+
+      // এখানে data.json থেকে ডাটা লোড হবে
+      fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+          if (data[cno]) {
+            const cert = data[cno];
+            document.getElementById('name').textContent = cert.name || '';
+            document.getElementById('id_pp').textContent = cert.id_pp || '';
+            document.getElementById('dob').textContent = cert.dob || '';
+            document.getElementById('course').textContent = cert.course_title || '';
+            document.getElementById('type').textContent = cert.course_type || '';
+            document.getElementById('duration').textContent = cert.duration || '';
+            document.getElementById('nationality').textContent = cert.nationality || '';
+            document.getElementById('company').textContent = cert.company || '';
+            document.getElementById('cert_type').textContent = cert.cert_type || '';
+
+            document.getElementById('genuine-msg').textContent = 'The above certificate is genuine, and issued by Human Assets Training Institute';
+          } else {
+            document.getElementById('error-msg').textContent = 'Certificate not found or invalid!';
+          }
+        })
+        .catch(error => {
+          document.getElementById('error-msg').textContent = 'Error loading data!';
+          console.error(error);
+        });
     }
   </script>
 </body>
