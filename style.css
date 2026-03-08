@@ -1,0 +1,32 @@
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px; /* লোগোর মাঝে দূরত্ব */
+  margin-bottom: 10px;
+}
+.hat-logo, .cambridge-logo {
+  max-height: 80px; /* লোগোর উচ্চতা অ্যাডজাস্ট করো */
+  width: auto;
+}
+.search-box {
+  text-align: center;
+  margin: 20px 0;
+}
+input {
+  padding: 12px;
+  width: 250px;
+  font-size: 18px;
+}
+button {
+  padding: 12px 25px;
+  background: #006600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
