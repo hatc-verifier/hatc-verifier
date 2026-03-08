@@ -5,87 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Certificate Details</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-      color: #000;
-      line-height: 1.4;
-    }
-    .header {
-      text-align: center;
-      padding: 15px 0 10px;
-      background: #fff;
-    }
-    .header img {
-      width: 100%;
-      max-width: 900px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-    .main {
-      max-width: 700px;
-      margin: 20px auto;
-      padding: 0 15px;
-    }
-    h2 {
-      font-size: 22px;
-      margin: 20px 0 10px;
-      text-align: left;
-    }
-    .back-link {
-      float: right;
-      color: blue;
-      text-decoration: underline;
-      font-size: 16px;
-    }
-    .details-box {
-      border: 2px solid #000;
-      padding: 15px;
-      margin: 20px 0;
-      background: #fff;
-      text-align: left;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      border: 1px solid #000;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background: #f0f0f0;
-      width: 40%;
-    }
-    .genuine {
-      color: green;
-      font-weight: bold;
-      font-size: 18px;
-      margin: 20px 0;
-      text-align: center;
-    }
-    .contact {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 15px;
-    }
-    .cert-image {
-      width: 100%;
-      max-width: 800px;
-      height: auto;
-      display: block;
-      margin: 30px auto;
-      border: 2px solid #000;
-    }
-    @media (max-width: 600px) {
-      .details-box { padding: 10px; }
-      table { font-size: 14px; }
-      th, td { padding: 8px; }
-    }
+    body { margin:0; padding:0; font-family:Arial,sans-serif; background:#fff; color:#000; }
+    .header { text-align:center; padding:15px 0 10px; }
+    .header img { width:100%; max-width:900px; height:auto; display:block; margin:0 auto; }
+    .main { max-width:700px; margin:20px auto; padding:0 15px; }
+    h2 { font-size:22px; margin:20px 0 10px; }
+    .back { float:right; color:blue; text-decoration:underline; }
+    .box { border:2px solid #000; padding:15px; margin:20px 0; }
+    table { width:100%; border-collapse:collapse; }
+    th, td { border:1px solid #000; padding:10px; text-align:left; }
+    th { background:#f0f0f0; width:40%; }
+    .genuine { color:green; font-weight:bold; text-align:center; margin:20px 0; font-size:18px; }
+    .contact { margin-top:40px; text-align:center; font-size:15px; }
+    .error { color:red; text-align:center; font-size:20px; }
   </style>
 </head>
 <body>
@@ -94,22 +26,10 @@
   </div>
 
   <div class="main">
-    <h2>Details Below: <a href="index.html" class="back-link">Back To Home Page</a></h2>
+    <h2>Details Below: <a href="index.html" class="back">Back To Home Page</a></h2>
 
-    <!-- মাঝখানে তোমার ছবি (সার্টিফিকেট ইমেজ) -->
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const cno = params.get('cno');
-      if (cno) {
-        document.write('<img src="' + cno + '.png" class="cert-image" alt="Certificate">');
-      } else {
-        document.write('<p style="color:red; text-align:center;">No Certificate Number!</p>');
-      }
-    </script>
-
-    <!-- টেবিল + লেখা – একদম তোমার ছবির মতো -->
-    <div class="details-box">
-      <table>
+    <div class="box">
+      <table id="data-table">
         <tr><th>C. No</th><td id="c_no"></td></tr>
         <tr><th>Name</th><td id="name"></td></tr>
         <tr><th>ID/PP NO</th><td id="id_pp"></td></tr>
@@ -123,7 +43,7 @@
       </table>
     </div>
 
-    <p class="genuine">The above certificate is genuine, and issued by Human Assets Training Institute</p>
+    <p id="genuine-msg" class="genuine"></p>
 
     <div class="contact">
       <h3>Contact us:</h3>
@@ -133,24 +53,43 @@
   </div>
 
   <script>
-    // এখানে ডাটা হার্ডকোড (তুমি চাইলে পরে JSON থেকে আনতে পারো)
-    const params = new URLSearchParams(window.location.search);
-    const cno = params.get('cno');
+    async function loadData() {
+      const params = new URLSearchParams(window.location.search);
+      const cno = params.get('cno');
 
-    if (cno === '121086') {
-      document.getElementById('c_no').textContent = '121086';
-      document.getElementById('name').textContent = 'BAHADUR ALI AKBAR';
-      document.getElementById('id_pp').textContent = '2478695741';
-      document.getElementById('dob').textContent = '/';
-      document.getElementById('course').textContent = 'FIRE WATCH TRAINING(Hazard Recognition, Fire Safety, SCBA, Gas Testing)';
-      document.getElementById('type').textContent = 'Health & Safety';
-      document.getElementById('duration').textContent = '20-Jan-2026 To 19-Jan-2028';
-      document.getElementById('nationality').textContent = 'BANGLADESHI';
-      document.getElementById('company').textContent = 'INDIVIDUAL CASH';
-      document.getElementById('cert_type').textContent = 'HAT';
-    } else {
-      document.querySelector('.details-box').innerHTML = '<p style="color:red;">Certificate not found!</p>';
+      if (!cno) {
+        document.getElementById('genuine-msg').innerHTML = '<span style="color:red">No Certificate Number Provided!</span>';
+        return;
+      }
+
+      document.getElementById('c_no').textContent = cno;
+
+      try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+
+        if (data[cno]) {
+          const cert = data[cno];
+          document.getElementById('name').textContent = cert.name || '';
+          document.getElementById('id_pp').textContent = cert.id_pp || '';
+          document.getElementById('dob').textContent = cert.dob || '';
+          document.getElementById('course').textContent = cert.course_title || '';
+          document.getElementById('type').textContent = cert.course_type || '';
+          document.getElementById('duration').textContent = cert.duration || '';
+          document.getElementById('nationality').textContent = cert.nationality || '';
+          document.getElementById('company').textContent = cert.company || '';
+          document.getElementById('cert_type').textContent = cert.cert_type || '';
+
+          document.getElementById('genuine-msg').textContent = 'The above certificate is genuine, and issued by Human Assets Training Institute';
+        } else {
+          document.getElementById('genuine-msg').innerHTML = '<span style="color:red">Certificate not found or invalid!</span>';
+        }
+      } catch (error) {
+        document.getElementById('genuine-msg').innerHTML = '<span style="color:red">Error loading data!</span>';
+      }
     }
+
+    loadData();
   </script>
 </body>
 </html>
