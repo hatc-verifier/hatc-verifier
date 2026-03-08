@@ -2,30 +2,20 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: #ffffff;
+  background: white;
 }
 
 .header {
   text-align: center;
   padding: 0;
   margin: 0;
-  background: white;
 }
 
 .header img {
-  width: 100%;               /* মোবাইলে পুরো স্ক্রিনে ফিট */
-  height: auto;              /* অনুপাত ঠিক রাখে */
+  width: 100%;          /* মোবাইলে পুরো স্ক্রিনে ফিট */
+  height: auto;         /* অনুপাত ঠিক রাখে */
   display: block;
   margin: 0 auto;
-  max-width: 1000px;         /* ডেস্কটপে খুব বড় না হয় */
-}
-
-/* মোবাইলের জন্য অতিরিক্ত অ্যাডজাস্ট */
-@media (max-width: 600px) {
-  .header img {
-    width: 100%;
-    height: auto;
-  }
 }
 
 .container {
@@ -37,7 +27,6 @@ body {
 
 h1 {
   color: #006600;
-  margin-bottom: 10px;
 }
 
 p {
@@ -49,16 +38,14 @@ p {
   display: flex;
   justify-content: center;
   gap: 10px;
-  flex-wrap: wrap;
 }
 
 input {
   padding: 12px;
   font-size: 18px;
-  width: 70%;
+  width: 60%;
   max-width: 300px;
   border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 button {
@@ -67,10 +54,5 @@ button {
   background: #006600;
   color: white;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-}
-
-button:hover {
-  background: #004d00;
 }
