@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate</title>
+  <style>
+    body { margin:0; padding:0; background:#fff; }
+    img { width:100%; height:auto; display:block; }
+    .no-img { text-align:center; font-size:20px; color:red; padding:50px; }
+  </style>
+</head>
+<body>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const cno = params.get('cno');
+
+    if (cno) {
+      // তোমার ছবির নাম = নম্বর + .png
+      document.body.innerHTML = '<img src="' + cno + '.png" alt="Certificate">';
+    } else {
+      document.body.innerHTML = '<div class="no-img">কোনো সার্টিফিকেট নম্বর দেয়া হয়নি!</div>';
+    }
+  </script>
+</body>
+</html>
