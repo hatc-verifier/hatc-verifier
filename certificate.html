@@ -5,108 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Certificate Details</title>
   <style>
-    body { 
-      margin: 0; 
-      padding: 0; 
-      font-family: Arial, sans-serif; 
-      background: #fff; 
-      line-height: 1.2; 
-    }
+    body { margin: 0; padding: 0; font-family: Arial, sans-serif; background: #fff; line-height: 1.2; }
+    .header { text-align: center; padding: 10px 0; border-bottom: 2.5px solid #555; }
+    .header img { width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto; }
+    .main { max-width: 900px; margin: 10px auto; padding: 0 10px; }
     
-    /* হেডার সেকশন */
-    .header { 
-      text-align: center; 
-      padding: 5px 0; 
-      border-bottom: 2px solid #555; 
-    }
-    .header img { 
-      width: 100%; 
-      max-width: 900px; 
-      height: auto; 
-      display: block; 
-      margin: 0 auto; 
-    }
+    h2 { font-size: 15px; margin: 10px 0; display: flex; justify-content: space-between; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+    .back { color: #600090; text-decoration: underline; font-size: 13px; font-weight: bold; }
 
-    .main { 
-      max-width: 900px; 
-      margin: 10px auto; 
-      padding: 0 10px; 
-    }
-    
-    /* উপরের টাইটেল এবং ব্যাক বাটন */
-    h2 { 
-      font-size: 13px; 
-      margin: 10px 0; 
-      display: flex; 
-      justify-content: space-between; 
-      border-bottom: 1px solid #ccc; 
-      padding-bottom: 5px; 
-      font-weight: bold;
-    }
-    .back { 
-      color: #600090; 
-      text-decoration: underline; 
-      font-size: 12px; 
-    }
-
-    /* অরিজিনাল ডিজাইনের মতো ছোট ও চিকন বক্স */
+    /* বক্স ডিজাইন - ছবির মতো ছোট করার জন্য উইডথ এবং প্যাডিং কমানো হয়েছে */
     .details-box { 
-      border: 1.2px solid #000; 
-      border-radius: 20px; 
-      padding: 8px 15px; 
-      margin: 20px auto; 
-      background: #fff;
+      border: 1.5px solid #000; 
+      border-radius: 25px; 
+      padding: 10px 15px; /* প্যাডিং কম */
+      margin: 15px auto; /* মার্জিন অ্যাডজাস্ট */
       width: 90%; 
-      max-width: 450px; /* বক্সের চওড়া কমানো হয়েছে */
+      max-width: 420px; /* বক্সের চওড়া কমানো হয়েছে */
+      display: none;
     }
 
-    table { 
-      width: 100%; 
-      border-collapse: collapse; 
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1.2px solid #eee; padding: 5px 0; text-align: left; font-size: 12.5px; }
+    th { width: 35%; font-weight: bold; color: #000; }
+    td { padding-left: 12px; color: #333; vertical-align: top; }
+    tr:last-child th, tr:last-child td { border-bottom: none; }
+
+    /* ব্র্যাকেটের ভেতরের টেক্সট ছোট করার জন্য */
+    .small-text {
+      font-size: 10.5px;
+      font-weight: normal;
+      display: block;
+      margin-top: 2px;
+      line-height: 1.2;
+      color: #444;
     }
 
-    th, td { 
-      border-bottom: 1px solid #f0f0f0; 
-      padding: 4px 0; /* রো এর উচ্চতা কমানো হয়েছে */
-      text-align: left; 
-      font-size: 11px; 
-      vertical-align: top;
-    }
+    .status-msg { text-align: center; margin-top: 15px; font-size: 13.5px; display: none; }
+    .error { color: red; font-weight: bold; }
 
-    th { 
-      font-weight: bold; 
-      width: 35%; 
-      color: #000; 
-    }
-
-    td { 
-      color: #333; 
-      padding-left: 10px;
-    }
-
-    tr:last-child th, tr:last-child td { 
-      border-bottom: none; 
-    }
-
-    /* নিচের মেসেজ এবং কন্টাক্ট ইনফো */
+    /* নিচের লেখাগুলো ছোট করার জন্য নতুন স্টাইল */
     .genuine { 
       color: #444; 
       text-align: center; 
       margin: 20px 0 10px; 
-      font-size: 11px; 
-      border-top: 1px solid #ccc; 
-      padding-top: 10px; 
+      font-size: 11px; /* ফন্ট ছোট */
+      line-height: 1.4;
+      display: none;
     }
 
     .contact { 
       text-align: center; 
-      font-size: 11px; 
+      font-size: 11px; /* কন্টাক্ট ইনফোর ফন্টও ছোট */
       line-height: 1.5;
+      border-top: 1px solid #ccc; 
+      margin-top: 25px; 
+      padding-top: 10px; 
     }
     
     .contact strong { font-size: 13px; }
     
-    .error-msg { color: red; text-align: center; font-weight: bold; margin-top: 50px; }
+    a { color: #0000EE; text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -117,10 +75,11 @@
 
   <div class="main">
     <h2>Details Below: <a href="index.html" class="back">Back To Home Page</a></h2>
-    
-    <div id="loading" style="text-align:center; padding:20px; font-size:12px;">Loading...</div>
 
-    <div class="details-box" id="details-box" style="display:none;">
+    <div id="loading" style="text-align:center; margin-top:20px;">Loading details...</div>
+    <div id="error-msg" class="status-msg error"></div>
+
+    <div class="details-box" id="details-box">
       <table>
         <tr><th>C. No</th><td id="c_no"></td></tr>
         <tr><th>Name</th><td id="name"></td></tr>
@@ -135,15 +94,13 @@
       </table>
     </div>
 
-    <p id="genuine-msg" class="genuine" style="display:none;">
+    <p id="genuine-msg" class="genuine">
       The above certificate is genuine, and issued by Human Assets Training Institute
     </p>
 
-    <p id="error-msg" class="error-msg" style="display:none;"></p>
-
     <div class="contact">
       <p><strong>Contact us:</strong><br>
-      Tel: +966 13 849-3360 | Fax: +966 13 849-3404<br>
+      Tel: +966 13 849-3360 Fax: +966 13 849-3404<br>
       E-Mail: <a href="mailto:info@hatc-ksa.com">info@hatc-ksa.com</a></p>
     </div>
   </div>
@@ -157,17 +114,19 @@
       document.getElementById('error-msg').textContent = 'No Certificate Number Provided!';
       document.getElementById('error-msg').style.display = 'block';
     } else {
-      fetch('data.json')
+      // ক্যাশ সমস্যা এড়াতে Math.random ব্যবহার করা হয়েছে
+      fetch('data.json?v=' + Math.random())
         .then(res => res.json())
         .then(data => {
           document.getElementById('loading').style.display = 'none';
           if (data[cno]) {
             const cert = data[cno];
-            document.getElementById('c_no').textContent = cno;
+            document.getElementById('c_no').textContent = cert.c_no;
             document.getElementById('name').textContent = cert.name;
             document.getElementById('id_pp').textContent = cert.id_pp;
-            document.getElementById('dob').textContent = cert.dob || '/';
-            document.getElementById('course').textContent = cert.course_title;
+            document.getElementById('dob').textContent = cert.dob;
+            // .innerHTML ব্যবহার করা হয়েছে যাতে <br> এবং <span> কাজ করে
+            document.getElementById('course').innerHTML = cert.course_title; 
             document.getElementById('type').textContent = cert.course_type;
             document.getElementById('duration').textContent = cert.duration;
             document.getElementById('nationality').textContent = cert.nationality;
@@ -177,13 +136,13 @@
             document.getElementById('details-box').style.display = 'block';
             document.getElementById('genuine-msg').style.display = 'block';
           } else {
-            document.getElementById('error-msg').textContent = 'Invalid Certificate Number!';
+            document.getElementById('error-msg').textContent = 'Error: Data not found!';
             document.getElementById('error-msg').style.display = 'block';
           }
         })
         .catch(() => {
           document.getElementById('loading').style.display = 'none';
-          document.getElementById('error-msg').textContent = 'Error: Data not found!';
+          document.getElementById('error-msg').textContent = 'Error loading data.';
           document.getElementById('error-msg').style.display = 'block';
         });
     }
