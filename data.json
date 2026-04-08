@@ -47,6 +47,18 @@
     "company": "INDIVIDUAL CASH",
     "cert_type": "HAT"
   },
+  "121239": {
+    "c_no": "121239",
+    "name": "KAYOM MIAH",
+    "id_pp": "2547826061",
+    "dob": "--",
+    "course_title": "FIRE WATCH TRAINING <br> <span class='small-text'>(Hazard Recognition, Fire Safety, SCBA, Gas Testing)</span>",
+    "course_type": "Safety",
+    "duration": "07-April-2026 To 06-April-2028",
+    "nationality": "BANGLADESHI",
+    "company": "INDIVIDUAL CASH",
+    "cert_type": "HAT"
+  },
   "121123": {
     "c_no": "121123",
     "name": "MD MAHIBULLAH ABDUL MALEK HAWLADER",
